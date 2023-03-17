@@ -3,6 +3,7 @@ from Matrix2Image import Matrix2Image
 from double2uint8 import double2uint8
 from Video2Matrix import Video2Matrix
 from Matrix2Video import Matrix2Video
+from img_miss_pix import missing_pixels
 import os
 import numpy as np
 
@@ -16,7 +17,7 @@ import numpy as np
 #Matrix2Image(A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase,'Matrix2ImageResults','Matrix2ImageResult_')
 
 #Llamado de prueba a la función video2Matrix
-#XO_video2Matrix, m1, n1 = Video2Matrix('Video2MatrixExample/video.mp4',0.1,100)
+#XO_video2Matrix, m1, n1 = Video2Matrix('Video2MatrixExample/video.mp4')
 
 #Llamado de prueba a la función video2Matrix con scale y numFrames
 #XO_video2Matrix, m1, n1 = Video2Matrix('Video2MatrixExample/video.mp4',0.1,100)
@@ -24,7 +25,13 @@ import numpy as np
 #np.set_printoptions(precision=2, threshold=np.inf)
 #print(XO_video2Matrix)
 
-#Llamado de prueba a la función Matrix2Video
-#Matrix2Video(XO_video2Matrix,m1,n1,'Matrix2VideoResults\\Matrix2VideoResult.mp4')
+#Llamado de prueba a la función Matrix2Video, misma carpeta
+#Matrix2Video(XO_video2Matrix,m1,n1,'./Matrix2VideoResult.mp4')
+
+#Llamado de prueba a la función Matrix2Video, distinta carpeta
+#Matrix2Video(XO_video2Matrix,m1,n1,'Matrix2VideoResults/Matrix2VideoResult.mp4')
+
+#Llamado de prueba a la función missing_pixels
+#missing_pixels('ImageDatabase/tree.jpg',0.15)
 
 

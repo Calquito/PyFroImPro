@@ -22,19 +22,18 @@ def Matrix2Image(X, m, n, TextPath, Name):
     # Texto con los ceros necesarios.
     CerosText = NStr('0', NumCeros)
 
-    # Para cada imagen, convertir a uint8 y guardar en disco.
+    # Para cada imagen, convertir a uint8 y guardar.
     for i in range(p):
         # Número de ceros necesarios para el nombre actual.
         NumCerosActual = len(str(i+1))
         # Texto con los ceros necesarios para el nombre actual.
         CerosActual = CerosText[0:(NumCeros-NumCerosActual)]
-        # Convertir imagen a uint8 y guardar en disco.
+        # Convertir imagen a uint8 y guardar.
         im = Image.fromarray(double2uint8(np.reshape(X[:,i], isize)))
         im.save(direccion + CerosActual + str(i+1) + '.jpg')
 
 def NStr(Text, N):
 
-    # Cadena de caracteres vacía.
     TextOut = ''
     # Concatenar la cadena de caracteres N veces.
     for i in range(N):
