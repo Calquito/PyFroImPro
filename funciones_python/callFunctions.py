@@ -4,6 +4,7 @@ from double2uint8 import double2uint8
 from Video2Matrix import Video2Matrix
 from Matrix2Video import Matrix2Video
 from img_miss_pix import missing_pixels
+from RankConstrainedFilterX import RankConstrainedFilterX
 import os
 import numpy as np
 
@@ -33,5 +34,18 @@ import numpy as np
 
 #Llamado de prueba a la función missing_pixels
 #missing_pixels('ImageDatabase/tree.jpg',0.15)
+
+#Llamado de prueba a la función missing_pixels
+# Matriz A
+A = np.array([[-1, 1, 2],
+              [3, 0, -1],
+              [2, -2, 3],
+              [4, 0, 3]])
+
+# Matriz C
+C = np.array([[-2, 1, 6],
+              [-2, 4, 5]])
+k=2
+print(RankConstrainedFilterX(A,C,k))
 
 
