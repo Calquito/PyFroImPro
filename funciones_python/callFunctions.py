@@ -5,11 +5,14 @@ from Video2Matrix import Video2Matrix
 from Matrix2Video import Matrix2Video
 from img_miss_pix import missing_pixels
 from RankConstrainedFilterX import RankConstrainedFilterX
+from NoiseFunction import noise_function
 import os
 import numpy as np
 
 #Llamado de prueba a la función ReadImageDataBase
-#A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
+A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
+#np.set_printoptions(precision=5, threshold=np.inf)
+#print(A_ReadImageDataBase)
 
 #Llamado de prueba a la función double2uint8
 #A_double2uint8 = double2uint8(A_ReadImageDataBase)
@@ -23,7 +26,7 @@ import numpy as np
 #Llamado de prueba a la función video2Matrix con scale y numFrames
 #XO_video2Matrix, m1, n1 = Video2Matrix('Video2MatrixExample/video.mp4',0.1,100)
 
-#np.set_printoptions(precision=2, threshold=np.inf)
+#np.set_printoptions(precision=6, threshold=np.inf)
 #print(XO_video2Matrix)
 
 #Llamado de prueba a la función Matrix2Video, misma carpeta
@@ -36,8 +39,8 @@ import numpy as np
 #missing_pixels('ImageDatabase/tree.jpg',0.15)
 
 #Llamado de prueba a la función missing_pixels
-# Matriz A
-A = np.array([[-1, 1, 2],
+#Matriz A
+'''A = np.array([[-1, 1, 2],
               [3, 0, -1],
               [2, -2, 3],
               [4, 0, 3]])
@@ -46,6 +49,11 @@ A = np.array([[-1, 1, 2],
 C = np.array([[-2, 1, 6],
               [-2, 4, 5]])
 k=2
-print(RankConstrainedFilterX(A,C,k))
+print(RankConstrainedFilterX(A,C,k))'''
 
+#Llamado de prueba a la función NoiseFunction
+
+#A,C,m,n=noise_function("ImageDatabaseSmall")
+#np.set_printoptions(precision=3, threshold=np.inf)
+#print(C)
 
