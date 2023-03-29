@@ -53,7 +53,7 @@ print(RankConstrainedFilterX(A,C,k))'''
 
 #Llamado de prueba a la función NoiseFunction
 
-#A,C,m,n=noise_function("ImageDatabaseSmall")
+#A,C,m,n=NoiseFunction("ImageDatabaseSmall")
 #np.set_printoptions(precision=3, threshold=np.inf)
 #print(C)
 
