@@ -1,3 +1,5 @@
+import os
+import numpy as np
 from ReadImageDataBase import ReadImageDataBase
 from Matrix2Image import Matrix2Image
 from double2uint8 import double2uint8
@@ -5,12 +7,13 @@ from Video2Matrix import Video2Matrix
 from Matrix2Video import Matrix2Video
 from img_miss_pix import missing_pixels
 from RankConstrainedFilterX import RankConstrainedFilterX
-from NoiseFunction import noise_function
-import os
-import numpy as np
+from NoiseFunction import NoiseFunction
+from LowRankMatrixBRP import LowRankMatrixBRP
+from ImageCompression import ImageCompression
+
 
 #Llamado de prueba a la función ReadImageDataBase
-A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
+#A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
 #np.set_printoptions(precision=5, threshold=np.inf)
 #print(A_ReadImageDataBase)
 
@@ -53,7 +56,13 @@ print(RankConstrainedFilterX(A,C,k))'''
 
 #Llamado de prueba a la función NoiseFunction
 
-#A,C,m,n=NoiseFunction("ImageDatabaseSmall")
+#A,C,m,n=NoiseFunction("p")
 #np.set_printoptions(precision=3, threshold=np.inf)
 #print(C)
 
+#Llamado de prueba a la función LowRankMatrixBRP
+#L = np.array([[-1, 1, 2],[3, 0, -1],[2, -2, 3],[4, 0, 3]])
+#A,B = LowRankMatrixBRP(L)
+
+#Llamado de prueba a la función ImageCompression
+ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP')
