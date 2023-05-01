@@ -14,6 +14,8 @@ def SaveFilteredImages(pathNoise,pathWriteFiltered,X):
     for i in range(1, NumImgWithNoise):
         ImagenNIConRuidoColumna = C[:,i-1] # Leo la columna i de C
         ImagenNIConRuido = ImagenNIConRuidoColumna.reshape((m, n)) # La convierto en matriz
+
+        
         cv2.imwrite(os.path.join(pathWriteFiltered, f"BlurredImage ({i}).jpg"), ImagenNIConRuido) # Genero la imagen i
         imagenNIFiltradaColumna = np.dot(X, ImagenNIConRuidoColumna)
         imagenNIFiltrada = imagenNIFiltradaColumna.reshape((m, n)) # La convierto en matriz

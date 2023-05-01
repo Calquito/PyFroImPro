@@ -1,12 +1,10 @@
 import numpy as np
 from scipy.sparse import csc_matrix
 from LowRankMatrixBRP import LowRankMatrixBRP
+import math
 
-import numpy as np
-from scipy.sparse import coo_matrix
-from LowRankMatrixBRP import LowRankMatrixBRP
 
-def GoDec(XMatrix, r, k, Opcion):
+def GoDec(XMatrix, r, k, Opcion,c=3,IteraMax=100,Tol=2e-6):
     Bandera = False
     m, n = XMatrix.shape
     if m < n:
@@ -19,14 +17,12 @@ def GoDec(XMatrix, r, k, Opcion):
     L = XMatrix
     Errors = [np.inf]
     NormaX2 = np.linalg.norm(XMatrix, 'fro')**2
-    ValorError = np.inf
-    Tol = 1e-6
-    IteraMax = 500
+    ValorError = np.inf    
 
     if Opcion == 'BRP':
         while ValorError > Tol and t < IteraMax:
             t += 1
-            A, B = LowRankMatrixBRP(XMatrix - S)
+            A, B = LowRankMatrixBRPSinValidacion(XMatrix - S)
             L = np.dot(A, B)
 
             T = XMatrix - L  # Inicia la actualización de S
@@ -74,8 +70,10 @@ def GoDec(XMatrix, r, k, Opcion):
     return LF, SF, Errors
 
 
-def LowRankMatrixBRPSinValidacion(L, r, c):
-    n = L.shape[1]
+def LowRankMatrixBRPSinValidacion(L, r=None,c=3):
+    m,n = L.shape
+    if r is None:
+        r=math.floor(min(m, n) / 2)
     Y2 = np.random.randn(n, r)
 
     for i in range(c+1):

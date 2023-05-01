@@ -68,8 +68,9 @@ print(RankConstrainedFilterX(A,C,k))'''
 #Llamado de prueba a la función ImageCompression
 #ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP')
 
+#Llamado de prueba a la función GoDecVideoFull
 r=2
 s=2150000
-GoDecVideoFull('video.mp4',r,s,'BRP')
+GoDecVideoFull('cut_video.mp4','ejemplos/3_Modelado_Fondo',r,s,'BRP')
 
 
