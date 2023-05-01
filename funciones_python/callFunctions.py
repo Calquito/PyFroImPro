@@ -10,6 +10,7 @@ from RankConstrainedFilterX import RankConstrainedFilterX
 from NoiseFunction import NoiseFunction
 from LowRankMatrixBRP import LowRankMatrixBRP
 from ImageCompression import ImageCompression
+from GoDecVideoFull import GoDecVideoFull
 
 
 #Llamado de prueba a la función ReadImageDataBase
@@ -56,7 +57,7 @@ print(RankConstrainedFilterX(A,C,k))'''
 
 #Llamado de prueba a la función NoiseFunction
 
-#A,C,m,n=NoiseFunction("p")
+#A,C,m,n=NoiseFunction("ImageDatabaseSmall")
 #np.set_printoptions(precision=3, threshold=np.inf)
 #print(C)
 
@@ -65,4 +66,10 @@ print(RankConstrainedFilterX(A,C,k))'''
 #A,B = LowRankMatrixBRP(L)
 
 #Llamado de prueba a la función ImageCompression
-ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP')
+#ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP')
+
+r=2
+s=2150000
+GoDecVideoFull('video.mp4',r,s,'BRP')
+
+

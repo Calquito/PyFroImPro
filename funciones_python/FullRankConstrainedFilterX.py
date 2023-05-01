@@ -13,6 +13,6 @@ def FullRankConstrainedFilterX(Textpath,k=None,NoiseOption='gaussian', sigmagaus
     elif(k>min(mA,nA)):
         raise ValueError('The value of "k" is invalid. For your dataset it must satisfy the condition 0<k<='+str(min(mA,nA)))
     #obtener C y X con las funciones respectivas
-    C = NoiseFunction(Textpath,NoiseOption,sigmagauss,meangauss,d,sigmaspeckle)
+    _,C,_,_ = NoiseFunction(Textpath,NoiseOption,sigmagauss,meangauss,d,sigmaspeckle)
     X = RankConstrainedFilterX(A,C,k)
     return A,C,X,m,n

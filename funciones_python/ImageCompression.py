@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import os
 
-def ImageCompression(Textpath, radio, Opcion):
+def ImageCompression(Textpath, radio, Opcion,results_path):
     # Validación de la opción
     ExpectedOptions = ['BRP', 'SVD']
     Opcion = Opcion.upper().replace(' ', '')
@@ -42,8 +42,8 @@ def ImageCompression(Textpath, radio, Opcion):
     direccion = 'Results'
     if not os.path.exists(direccion):
         os.mkdir(direccion)
-    cv2.imwrite('Results/OriginalImage.jpg', double2uint8(L))
-    cv2.imwrite('Results/CompressedImage.jpg', double2uint8(LTilde))
-    np.savetxt('Results/L.txt', L)
-    np.savetxt('Results/A.txt', A)
-    np.savetxt('Results/B.txt', B)
+    cv2.imwrite(results_path+'/Results/OriginalImage.jpg', double2uint8(L))
+    cv2.imwrite(results_path+'/Results/CompressedImage.jpg', double2uint8(LTilde))
+    np.savetxt(results_path+'/Results/L.txt', L)
+    np.savetxt(results_path+'/Results/A.txt', A)
+    np.savetxt(results_path+'/Results/B.txt', B)

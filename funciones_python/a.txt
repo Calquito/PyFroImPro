@@ -1,0 +1,66 @@
+function [LF,SF,Errors] = GoDec(XMatrix,r,k,Opcion)
+
+Bandera=false;
+if  m<n
+    XMatrix=XMatrix';
+    [m,n]=size(XMatrix);
+    Bandera=true;
+end
+
+S=sparse(zeros(m,n));
+t=0;
+L=XMatrix;
+Errors=[inf];
+NormaX2=(norm(XMatrix,'fro'))^2;
+ValorError=inf;
+if Opcion=='BRP'
+    while ((ValorError>Tol) && (t<IteraMax))
+        t=t+1;
+       [A,B]=LowRankMatrixBRP(XMatrix-S);
+       L=A*B;
+    
+        T=XMatrix-L;                  %Inicia la actualización de S
+        [~,idx]=sort(abs(T(:)),'descend');
+        S=zeros(m,n);
+        S(idx(1:k))=T(idx(1:k));                    
+    
+                            %Inicia el cálculo del nuevo error
+        T=XMatrix-L-S;
+        ErrorF=(norm(T,'fro'))^2/NormaX2;
+        T(idx(1:k))=0;
+  
+        Errors=[Errors, ErrorF];
+        ValorError= abs((Errors(end)-Errors(end-1)));
+    end
+elseif Opcion=='SVD'
+    while ((ValorError>Tol) && (t<IteraMax))
+        t=t+1;
+        [U,Sigma,VT]=svd(XMatrix-S);    %funciona pero esto lo hace muy caro.
+        U=U(:,1:r);
+        VT=VT(:,1:r);    
+        Sigma=Sigma(1:r,1:r);
+        L=U*Sigma*VT.';
+    
+        T=XMatrix-L;                  %Inicia la actualización de S
+        [~,idx]=sort(abs(T(:)),'descend');
+        S=zeros(m,n);
+        S(idx(1:k))=T(idx(1:k));                    
+    
+                            %Inicia el cálculo del nuevo error
+        T=XMatrix-L-S;
+        ErrorF=(norm(T,'fro'))^2/NormaX2;
+        T(idx(1:k))=0;
+  
+        Errors=[Errors, ErrorF];
+        ValorError= abs((Errors(end)-Errors(end-1)));
+    end    
+end
+if Bandera
+   LF=L';
+   SF=S';
+else
+    LF=L;
+    SF=S;
+end
+Errors=Errors(2:end);
+end
