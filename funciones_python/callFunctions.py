@@ -1,5 +1,7 @@
 import os
 import numpy as np
+import scipy.io
+
 from ReadImageDataBase import ReadImageDataBase
 from Matrix2Image import Matrix2Image
 from double2uint8 import double2uint8
@@ -11,7 +13,10 @@ from NoiseFunction import NoiseFunction
 from LowRankMatrixBRP import LowRankMatrixBRP
 from ImageCompression import ImageCompression
 from GoDecVideoFull import GoDecVideoFull
-
+from nnfLS import nnfLS
+from ConstructionNNFM import ConstructionNNFM
+from ReconstructionExternalFace import ReconstructionExternalFace
+from ReconstructionExternalFacesDirectory import ReconstructionExternalFacesDirectory
 
 #Llamado de prueba a la función ReadImageDataBase
 #A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
@@ -69,8 +74,41 @@ print(RankConstrainedFilterX(A,C,k))'''
 #ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP')
 
 #Llamado de prueba a la función GoDecVideoFull
-r=2
+'''r=2
 s=2150000
-GoDecVideoFull('cut_video.mp4','ejemplos/3_Modelado_Fondo',r,s,'BRP')
+GoDecVideoFull('cut_video.mp4','ejemplos/3_Modelado_Fondo',r,s,'BRP')'''
 
 
+#Llamado de prueba a la función nnfLS
+#Matriz A
+'''
+A = np.array([[1, 2, 5],
+              [2, 3, 5],
+              [6, 7, 1],
+              [6, 1, 0]])
+
+W, H, VectorError= nnfLS(A,3,1000)
+print(W)
+
+print(H)
+
+print(W@H)'''
+
+#Llamado de prueba a la función ConstructionNNFM
+#ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas')
+
+#Llamado de prueba a la función ReconstructionExternalFace
+'''
+# Carga el archivo .mat
+mat_file = scipy.io.loadmat('ejemplos/4_Extraccion_caracteristicas/Results/W.mat')
+W = mat_file['W']
+
+ReconstructionExternalFace('ejemplos/4_Extraccion_caracteristicas/f1.jpg','ejemplos/4_Extraccion_caracteristicas',W,'f1_reconstruida.jpg')'''
+
+#Llamado de prueba a la función ReconstructionExternalFaceDirectory
+
+# Carga el archivo .mat
+mat_file = scipy.io.loadmat('ejemplos/4_Extraccion_caracteristicas/Results/W.mat')
+W = mat_file['W']
+
+ReconstructionExternalFacesDirectory('ejemplos/4_Extraccion_caracteristicas/ReconstructionDirectory','ejemplos/4_Extraccion_caracteristicas/',W)

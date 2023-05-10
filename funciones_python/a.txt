@@ -1,66 +1,34 @@
-function [LF,SF,Errors] = GoDec(XMatrix,r,k,Opcion)
+function [] = ReconstructionExternalFacesDirectory(Textpath,W,varargin)
 
-Bandera=false;
-if  m<n
-    XMatrix=XMatrix';
-    [m,n]=size(XMatrix);
-    Bandera=true;
-end
-
-S=sparse(zeros(m,n));
-t=0;
-L=XMatrix;
-Errors=[inf];
-NormaX2=(norm(XMatrix,'fro'))^2;
-ValorError=inf;
-if Opcion=='BRP'
-    while ((ValorError>Tol) && (t<IteraMax))
-        t=t+1;
-       [A,B]=LowRankMatrixBRP(XMatrix-S);
-       L=A*B;
-    
-        T=XMatrix-L;                  %Inicia la actualización de S
-        [~,idx]=sort(abs(T(:)),'descend');
-        S=zeros(m,n);
-        S(idx(1:k))=T(idx(1:k));                    
-    
-                            %Inicia el cálculo del nuevo error
-        T=XMatrix-L-S;
-        ErrorF=(norm(T,'fro'))^2/NormaX2;
-        T(idx(1:k))=0;
-  
-        Errors=[Errors, ErrorF];
-        ValorError= abs((Errors(end)-Errors(end-1)));
-    end
-elseif Opcion=='SVD'
-    while ((ValorError>Tol) && (t<IteraMax))
-        t=t+1;
-        [U,Sigma,VT]=svd(XMatrix-S);    %funciona pero esto lo hace muy caro.
-        U=U(:,1:r);
-        VT=VT(:,1:r);    
-        Sigma=Sigma(1:r,1:r);
-        L=U*Sigma*VT.';
-    
-        T=XMatrix-L;                  %Inicia la actualización de S
-        [~,idx]=sort(abs(T(:)),'descend');
-        S=zeros(m,n);
-        S(idx(1:k))=T(idx(1:k));                    
-    
-                            %Inicia el cálculo del nuevo error
-        T=XMatrix-L-S;
-        ErrorF=(norm(T,'fro'))^2/NormaX2;
-        T(idx(1:k))=0;
-  
-        Errors=[Errors, ErrorF];
-        ValorError= abs((Errors(end)-Errors(end-1)));
-    end    
-end
-if Bandera
-   LF=L';
-   SF=S';
-else
-    LF=L;
-    SF=S;
-end
-Errors=Errors(2:end);
-end
+ 
+NameOutput='Reconstruted';% Validaciones
+Extension='.jpg';
+expectedExtensions = {'.jpg','.pgm','.bmp','.png','.tif'};
+ValidMatrix = @(x) ismatrix(x) && isnumeric(x);
+p = inputParser;
+addRequired(p,'Textpath');
+addRequired(p,'W',ValidMatrix);
+addParameter(p,'Extension',Extension,@(x) any(strcmp(lower(strrep(x,' ','')),expectedExtensions )));
+addParameter(p,'NameOutput',NameOutput);
+parse(p,Textpath,W,varargin{:});
+Extension=p.Results.Extension;
+NameOutput=p.Results.NameOutput;
+%%%%%
+NameFilesVector=ls(Textpath); %Vector con los nombres completos de todos los archivos en la carpeta
+i=0; %%%Controla el número de archivos válidos en la carpeta, dado que en la carpeta
+     %%% podrían haber archivos del sistema, los cuales hay que ignorar.
+ for j=1:size(NameFilesVector,1)
+   Filej=NameFilesVector(j,:); %Toma el archivo j de la carpeta
+   [~,~,Fileextension]=fileparts(Filej); %Lee la extenxión del archivo
+   %%% En el siguiente if valida el archivo y si la extensión coincide
+   if (and(~isdir(fullfile(Textpath,Filej)),or(strcmpi(strtrim(Fileextension),Extension),isempty(Extension))))
+       i=i+1; %% Archivo válido, incrementa el contador de imágenes.
+       direccion=fullfile(Textpath,Filej); %% Carga la dirección completa del archivo.
+       ReconstructionExternalFace(direccion,W,strcat(NameOutput,int2str(i)));
+   end
+ end
+ num_img=i;
+ if i==0 
+     error(strcat('There are not images in your data base with the extension ',Extension));
+ end
+ end
