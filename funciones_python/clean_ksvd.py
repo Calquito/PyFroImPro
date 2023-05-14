@@ -3,7 +3,7 @@ from scipy.io import loadmat
 from scipy import ndimage
 import cv2
 
-def clean_ksvd2(TextPath, D):
+def clean_ksvd(TextPath, D):
     I = cv2.imread(TextPath, cv2.IMREAD_GRAYSCALE)
     m_org, n_org = I.shape
     Z = block_img_8(I.astype(float)/255.0)

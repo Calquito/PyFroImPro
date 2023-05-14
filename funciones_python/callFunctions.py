@@ -18,12 +18,10 @@ from ConstructionNNFM import ConstructionNNFM
 from ReconstructionExternalFace import ReconstructionExternalFace
 from ReconstructionExternalFacesDirectory import ReconstructionExternalFacesDirectory
 from ksvd import ksvd
-from clean_ksvd1 import clean_ksvd1
-from clean_kvsd import clean_ksvd
 import numpy as np
 import imageio
 from PIL import Image
-from clean_ksvd_working import clean_ksvd2
+from clean_ksvd import clean_ksvd
 
 #Llamado de prueba a la función ReadImageDataBase
 #A_ReadImageDataBase,m_ReadImageDataBase,n_ReadImageDataBase = ReadImageDataBase('ImageDatabase')
@@ -120,36 +118,18 @@ W = mat_file['W']
 
 ReconstructionExternalFacesDirectory('ejemplos/4_Extraccion_caracteristicas/ReconstructionDirectory','ejemplos/4_Extraccion_caracteristicas/',W)'''
 
-def save_gray_image(matrix, filename):
-    # Normalizar la matriz para que los valores estén en el rango [0, 255]
-    matrix_norm = ((matrix - matrix.min()) / (matrix.max() - matrix.min())) * 255
-    # Convertir la matriz a un array de bytes sin signo de 8 bits
-    matrix_uint8 = np.uint8(matrix_norm)
-    # Guardar la imagen utilizando imageio
-    imageio.imwrite(filename, matrix_uint8)
-
 
 #Llamado de prueba a la función ksvd
-'''
+
 D,X,Err=ksvd('ejemplos/5_Completar_Pixeles/dataset_jpg',15,2,'.jpg')
 np.set_printoptions(precision=5, threshold=np.inf)
-print(D)'''
+print(D)
 
-'''
-import pickle
 
-# Cargar la variable "x" desde el archivo en otro script
-with open('archivo_datos.pickle', 'rb') as f:
-    D = pickle.load(f)'''
-
-D=np.loadtxt('X1.txt')
-
-#Usar la matriz de ksvd generada por octave, para ver en que lado esta el problema
-Y= clean_ksvd2('ejemplos/5_Completar_Pixeles/img_pix.pgm',D)
+#Llamado de prueba a la función clean_ksvd
+Y= clean_ksvd('ejemplos/5_Completar_Pixeles/img_pix.pgm',D)
 m,n = np.shape(Y)[:2]
 np.set_printoptions(precision=5, threshold=np.inf)
 print(Y)
-save_gray_image(Y,'a.jpg')
-save_gray_image(Y,'a.pgm')
 im = Image.fromarray(double2uint8(np.reshape(Y, [m,n])))
 im.save('b.jpg')
