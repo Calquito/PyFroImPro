@@ -28,4 +28,4 @@ _,_,X,_,_=FullRankConstrainedFilterX('ejemplos/2_Eliminacion_ruido/trainingData'
 # usuario) la función SaveFilteredImages guarda la imagen con ruido y la 
 # imagen limpiada al aplicar el filtro X.
 
-SaveFilteredImages('ejemplos/2_Eliminacion_ruido/NoisyImg','ejemplos/2_Eliminacion_ruido/Results',X)
+SaveFilteredImages('ejemplos/2_Eliminacion_ruido/NoisyImg','ejemplos/2_Eliminacion_ruido/Results/',X)
