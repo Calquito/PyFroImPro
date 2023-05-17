@@ -19,4 +19,6 @@ from ReconstructionExternalFace import ReconstructionExternalFace
 
 X1,X2=ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas',285)
 
-ReconstructionExternalFace('ejemplos/4_Extraccion_caracteristicas/f1.jpg','ejemplos/4_Extraccion_caracteristicas',X1,'f2.jpg')
+ReconstructionExternalFace('ejemplos/4_Extraccion_caracteristicas/f1.jpg','ejemplos/4_Extraccion_caracteristicas',X1,'f2')
+
+#24 minutos 49 segundos

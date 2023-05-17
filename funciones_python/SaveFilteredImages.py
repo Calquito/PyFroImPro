@@ -15,7 +15,7 @@ def SaveFilteredImages(pathNoise,pathWriteFiltered,X):
     if not os.path.exists(pathWriteFiltered):
         os.makedirs(pathWriteFiltered)
 
-    for i in range(1, NumImgWithNoise):
+    for i in range(NumImgWithNoise):
         ImagenNIConRuidoColumna = C[:,i-1] # Leo la columna i de C
         ImagenNIConRuido = ImagenNIConRuidoColumna.reshape((m, n)) # La convierto en matriz
 

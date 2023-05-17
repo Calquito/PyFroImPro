@@ -100,7 +100,7 @@ print(H)
 print(W@H)'''
 
 #Llamado de prueba a la función ConstructionNNFM
-#ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas')
+ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas')
 
 #Llamado de prueba a la función ReconstructionExternalFace
 '''
@@ -120,16 +120,17 @@ ReconstructionExternalFacesDirectory('ejemplos/4_Extraccion_caracteristicas/Reco
 
 
 #Llamado de prueba a la función ksvd
-
+'''
 D,X,Err=ksvd('ejemplos/5_Completar_Pixeles/dataset_jpg',15,2,'.jpg')
 np.set_printoptions(precision=5, threshold=np.inf)
-print(D)
+print(D)'''
 
 
 #Llamado de prueba a la función clean_ksvd
+'''
 Y= clean_ksvd('ejemplos/5_Completar_Pixeles/img_pix.pgm',D)
 m,n = np.shape(Y)[:2]
 np.set_printoptions(precision=5, threshold=np.inf)
 print(Y)
 im = Image.fromarray(double2uint8(np.reshape(Y, [m,n])))
-im.save('b.jpg')
+im.save('b.jpg')'''

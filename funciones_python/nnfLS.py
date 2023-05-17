@@ -1,12 +1,14 @@
 import numpy as np
 from numpy.linalg import norm
 
-def nnfLS(A, r=None, IteraMax=None, Tol=None):
+def nnfLS(A, r=None, IteraMax=None, Tol=10e-6):
     mA, nA = A.shape  # Obtener las dimensiones de la matriz A
     Min = min(mA, nA)  # Valor mínimo entre las dimensiones
-    r = r or (Min // 2)  # Si r no se proporciona, se establece como la mitad del valor mínimo
-    IteraMax = IteraMax or (2 * nA)  # Si IteraMax no se proporciona, se establece como 2 veces el número de columnas de A
-    Tol = Tol or (10 ** -6)  # Si Tol no se proporciona, se establece como 10^-6
+    if(r==None):
+        r = r or (Min // 2)  # Si r no se proporciona, se establece como la mitad del valor mínimo
+    if(IteraMax==None):
+        IteraMax = 2 * nA  # Si IteraMax no se proporciona, se establece como 2 veces el número de columnas de A
+
     
     # Validar los argumentos
     assert isinstance(A, np.ndarray) and A.ndim == 2 and np.issubdtype(A.dtype, np.number), "A debe ser una matriz numérica de dos dimensiones"

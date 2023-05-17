@@ -22,6 +22,6 @@ from ImageCompression  import ImageCompression
 
 # EJEMPLO PARTICULAR
 
-ImageCompression('ImageDatabase/tree.jpg',0.1,'BRP','ejemplos/1_Compresion_Imagenes/')
+ImageCompression('ejemplos/1_Compresion_Imagenes/montanas.jpg',0.1,'BRP','ejemplos/1_Compresion_Imagenes/results/')
 
 
