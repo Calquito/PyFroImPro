@@ -16,6 +16,7 @@ X1,X2,Err=ksvd('ejemplos/5_Completar_Pixeles/dataset_jpg',15,2,'.jpg')
 Img_Rec = clean_ksvd('ejemplos/5_Completar_Pixeles/img_pix.pgm',X1)
 
 #GENERAR IMAGEN
-m,n = np.shape(Img_Rec)[:2]
-im = Image.fromarray(double2uint8(np.reshape(Img_Rec, [m,n])))
+im = Image.fromarray(double2uint8(Img_Rec))
 im.save('ejemplos/5_Completar_Pixeles/img_pix_filled.jpg')
+
+#1 minuto 28 segundos

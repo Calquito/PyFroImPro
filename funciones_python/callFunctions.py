@@ -13,6 +13,7 @@ from NoiseFunction import NoiseFunction
 from LowRankMatrixBRP import LowRankMatrixBRP
 from ImageCompression import ImageCompression
 from GoDecVideoFull import GoDecVideoFull
+from GoDecImageFull import GoDecImageFull
 from nnfLS import nnfLS
 from ConstructionNNFM import ConstructionNNFM
 from ReconstructionExternalFace import ReconstructionExternalFace
@@ -83,6 +84,9 @@ print(RankConstrainedFilterX(A,C,k))'''
 s=2150000
 GoDecVideoFull('cut_video.mp4','ejemplos/3_Modelado_Fondo',r,s,'BRP')'''
 
+#Llamado de prueba a la función GoDecImageFull
+
+#GoDecImageFull("goDecImageFullPath",2,2150000,'BRP')
 
 #Llamado de prueba a la función nnfLS
 #Matriz A
@@ -100,7 +104,7 @@ print(H)
 print(W@H)'''
 
 #Llamado de prueba a la función ConstructionNNFM
-ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas')
+#ConstructionNNFM('ejemplos/4_Extraccion_caracteristicas/database','ejemplos/4_Extraccion_caracteristicas')
 
 #Llamado de prueba a la función ReconstructionExternalFace
 '''
